@@ -47,13 +47,13 @@ static void readString(FsFile& file, std::string& s) {
   uint32_t len;
   readPod(file, len);
   s.resize(len);
-  file.read(s.data(), len);
+  file.read(&s[0], len);
 }
 
 static void readString(FsFile& file, char* s, size_t buf_size) {
   uint32_t len;
   readPod(file, len);
-  auto lenToRead = std::min(buf_size - 1, len);
+  auto lenToRead = std::min(buf_size - 1, static_cast<size_t>(len));
   file.read(s, lenToRead);
   s[lenToRead] = '\0';
   if (lenToRead < len) {
