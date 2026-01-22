@@ -13,8 +13,8 @@
 #include "fontIds.h"
 
 namespace {
-constexpr int MENU_ITEMS = 2;
-const char* menuNames[MENU_ITEMS] = {"Calibre Web URL", "Connect as Wireless Device"};
+constexpr int MENU_ITEMS = 3;
+const char* menuNames[MENU_ITEMS] = {"Server URL", "OPDS Path", "Connect as Wireless Device"};
 }  // namespace
 
 void CalibreSettingsActivity::taskTrampoline(void* param) {
@@ -80,10 +80,10 @@ void CalibreSettingsActivity::handleSelection() {
   xSemaphoreTake(renderingMutex, portMAX_DELAY);
 
   if (selectedIndex == 0) {
-    // Calibre Web URL
+    // Server URL
     exitActivity();
     enterNewActivity(new KeyboardEntryActivity(
-        renderer, mappedInput, "Calibre Web URL", SETTINGS.opdsServerUrl, 10,
+        renderer, mappedInput, "Server URL", SETTINGS.opdsServerUrl, 10,
         127,    // maxLength
         false,  // not password
         [this](const std::string& url) {
@@ -97,7 +97,26 @@ void CalibreSettingsActivity::handleSelection() {
           exitActivity();
           updateRequired = true;
         }));
-  } else if (selectedIndex == 1) {
+ } else if (selectedIndex == 1) {
+   // OPDS Path
+   exitActivity();
+   enterNewActivity(new KeyboardEntryActivity(
+       renderer, mappedInput, "OPDS Path", SETTINGS.opdsPath, 10,
+       127,    // maxLength
+       false,  // not password
+       [this](const std::string& url) {
+         strncpy(SETTINGS.opdsPath, url.c_str(), sizeof(SETTINGS.opdsServerUrl) - 1);
+         SETTINGS.opdsPath[sizeof(SETTINGS.opdsPath) - 1] = '\0';
+         SETTINGS.saveToFile();
+         exitActivity();
+         updateRequired = true;
+       },
+       [this]() {
+         exitActivity();
+         updateRequired = true;
+       }));
+
+  } else if (selectedIndex == 2) {
     // Wireless Device - launch the activity (handles WiFi connection internally)
     exitActivity();
     if (WiFi.status() != WL_CONNECTED) {
@@ -141,7 +160,7 @@ void CalibreSettingsActivity::render() {
   const auto pageWidth = renderer.getScreenWidth();
 
   // Draw header
-  renderer.drawCenteredText(UI_12_FONT_ID, 15, "Calibre", true, EpdFontFamily::BOLD);
+  renderer.drawCenteredText(UI_12_FONT_ID, 15, "Remote Library", true, EpdFontFamily::BOLD);
 
   // Draw selection highlight
   renderer.fillRect(0, 60 + selectedIndex * 30 - 2, pageWidth - 1, 30);

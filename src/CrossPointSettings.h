@@ -90,6 +90,7 @@ class CrossPointSettings {
   uint8_t screenMargin = 5;
   // OPDS browser settings
   char opdsServerUrl[128] = "";
+  char opdsPath[128] = "";
   // Hide battery percentage
   uint8_t hideBatteryPercentage = HIDE_NEVER;
   // Long-press chapter skip on side buttons
