@@ -106,12 +106,7 @@ bool CrossPointSettings::loadFromFile() {
     if (++settingsRead >= fileSettingsCount) break;
     serialization::readPod(inputFile, sleepScreenCoverMode);
     if (++settingsRead >= fileSettingsCount) break;
-    {
-      std::string urlStr;
-      serialization::readString(inputFile, urlStr);
-      strncpy(opdsServerUrl, urlStr.c_str(), sizeof(opdsServerUrl) - 1);
-      opdsServerUrl[sizeof(opdsServerUrl) - 1] = '\0';
-    }
+    serialization::readString(inputFile, opdsServerUrl, sizeof(opdsServerUrl));
     if (++settingsRead >= fileSettingsCount) break;
     serialization::readPod(inputFile, textAntiAliasing);
     if (++settingsRead >= fileSettingsCount) break;
@@ -121,12 +116,7 @@ bool CrossPointSettings::loadFromFile() {
     if (++settingsRead >= fileSettingsCount) break;
     serialization::readPod(inputFile, hyphenationEnabled);
     if (++settingsRead >= fileSettingsCount) break;
-    {
-      std::string urlPath;
-      serialization::readString(inputFile, urlPath);
-      strncpy(opdsPath, urlPath.c_str(), sizeof(opdsPath) - 1);
-      opdsPath[sizeof(opdsPath) - 1] = '\0';
-    }
+    serialization::readString(inputFile, opdsPath, sizeof(opdsPath));
     if (++settingsRead >= fileSettingsCount) break;
   } while (false);
 
