@@ -97,24 +97,24 @@ void RemoteLibrarySettingsActivity::handleSelection() {
           exitActivity();
           updateRequired = true;
         }));
- } else if (selectedIndex == 1) {
-   // OPDS Path
-   exitActivity();
-   enterNewActivity(new KeyboardEntryActivity(
-       renderer, mappedInput, "OPDS Path", SETTINGS.opdsPath, 10,
-       127,    // maxLength
-       false,  // not password
-       [this](const std::string& url) {
-         strncpy(SETTINGS.opdsPath, url.c_str(), sizeof(SETTINGS.opdsServerUrl) - 1);
-         SETTINGS.opdsPath[sizeof(SETTINGS.opdsPath) - 1] = '\0';
-         SETTINGS.saveToFile();
-         exitActivity();
-         updateRequired = true;
-       },
-       [this]() {
-         exitActivity();
-         updateRequired = true;
-       }));
+  } else if (selectedIndex == 1) {
+    // OPDS Path
+    exitActivity();
+    enterNewActivity(new KeyboardEntryActivity(
+        renderer, mappedInput, "OPDS Path", SETTINGS.opdsPath, 10,
+        127,    // maxLength
+        false,  // not password
+        [this](const std::string& url) {
+          strncpy(SETTINGS.opdsPath, url.c_str(), sizeof(SETTINGS.opdsServerUrl) - 1);
+          SETTINGS.opdsPath[sizeof(SETTINGS.opdsPath) - 1] = '\0';
+          SETTINGS.saveToFile();
+          exitActivity();
+          updateRequired = true;
+        },
+        [this]() {
+          exitActivity();
+          updateRequired = true;
+        }));
 
   } else if (selectedIndex == 2) {
     // Wireless Device - launch the activity (handles WiFi connection internally)

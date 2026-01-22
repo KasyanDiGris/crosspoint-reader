@@ -5,12 +5,12 @@
 
 #include <cstring>
 
-#include "RemoteLibrarySettingsActivity.h"
 #include "ClearCacheActivity.h"
 #include "CrossPointSettings.h"
 #include "KOReaderSettingsActivity.h"
 #include "MappedInputManager.h"
 #include "OtaUpdateActivity.h"
+#include "RemoteLibrarySettingsActivity.h"
 #include "fontIds.h"
 
 void CategorySettingsActivity::taskTrampoline(void* param) {

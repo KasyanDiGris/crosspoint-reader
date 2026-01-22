@@ -131,7 +131,7 @@ The Settings screen allows you to configure the device's behavior. There are a f
 - **Reader Paragraph Alignment**: Set the alignment of paragraphs; options are "Justified" (default), "Left", "Center", or "Right".
 - **Time to Sleep**: Set the duration of inactivity before the device automatically goes to sleep.
 - **Refresh Frequency**: Set how often the screen does a full refresh while reading to reduce ghosting.
-- **Calibre Settings**: Set up integration for accessing a Calibre web library or connecting to Calibre as a wireless device.
+- **Remote Library**: Set up integration for accessing an OPDS Library (like Calibre web library) or connecting to Calibre as a wireless device.
 - **Check for updates**: Check for firmware updates over WiFi.
 
 ### 3.6 Sleep Screen

@@ -14,7 +14,7 @@
 class RemoteLibrarySettingsActivity final : public ActivityWithSubactivity {
  public:
   explicit RemoteLibrarySettingsActivity(GfxRenderer& renderer, MappedInputManager& mappedInput,
-                                   const std::function<void()>& onBack)
+                                         const std::function<void()>& onBack)
       : ActivityWithSubactivity("RemoteLibrarySettings", renderer, mappedInput), onBack(onBack) {}
 
   void onEnter() override;
